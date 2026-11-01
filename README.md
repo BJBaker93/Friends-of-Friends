@@ -1,57 +1,60 @@
-# Friends of Friends website
+# Friends of Friends ARG website
 
-Static GitHub Pages website. Generated HTML, CSS, a tiny background-video controller, and locally hosted artwork. No packages, build service, analytics, cookies, or runtime API credentials are required.
+The homepage is the user's original pasted HTML, preserved byte-for-byte. It is an ARG experience: the original full-screen GIF, positions of clickable circles, hover labels, mobile rules, links and SoundCloud player remain exactly as supplied. Do not redesign it or inject text, navigation, metadata or scripts into it.
 
-## Publish on GitHub Pages
+SEO content lives on separate, readable pages:
 
-In `BJBaker93/Friends-of-Friends` → Settings → Pages, select **Deploy from a branch**, branch **main**, folder **/docs**, then Save. The preview should be available at:
+- `/discover/`: a sourced listening guide with The 1975, Sam Fender, Australian alternative rock and Brisbane connections.
+- `/press/`: eight verified interviews, reviews and features.
 
-https://bjbaker93.github.io/Friends-of-Friends/
+These pages have their own navigation and SEO metadata. No links or other elements have been added to the ARG homepage. The sitemap lists the homepage and both supporting pages.
 
-The preview deliberately has `noindex, follow` in the HTML, keeping it out of search results while the existing custom-domain site remains live. This is public staging, not private access control. Search optimisation goes live when indexing is enabled on the custom domain.
+## Source and build
 
-## Edit and preview
+- `source/homepage.html` is the exact original homepage source.
+- `scripts/build.py` copies it directly to `docs/index.html` and generates the secondary pages.
+- `source/press.json` contains research and source URLs.
+- `source/config.json` controls the origin and indexing policy of secondary pages.
+- `docs/` is published by GitHub Pages from the `main` branch.
 
-1. Change page content in `scripts/build.py`, press evidence in `source/press.json`, or styles in `docs/assets/site.css`.
-2. Run `python3 scripts/build.py`.
-3. Run `python3 scripts/check_site.py`.
-4. Preview with `python3 -m http.server 8765 --directory docs`.
-5. Commit the changed source and generated `docs/` files.
+Run:
 
-The copy is deliberately factual. Interviews support The 1975 and Sam Fender connections; links are included visibly. Members, current tour dates and third-party endorsements are not invented. Use a live listings link until confirmed shows can be maintained accurately. Any new event schema should represent a verified future performance with a real venue, date and ticket URL.
+```sh
+python3 scripts/build.py
+python3 scripts/check_site.py
+```
 
-## Custom-domain launch — do together later
+The checker verifies the homepage against the original pasted file's SHA-256, then checks secondary-page links, metadata, JSON-LD and the sitemap. It intentionally does not impose SEO or markup changes on the original homepage.
 
-The current domain and DNS have not been changed. Before cutover:
+Repository: https://github.com/BJBaker93/Friends-of-Friends
 
-1. Record existing DNS, mail records, Search Console verification files, and important existing URLs. Preserve mail records. Keep the old host available during the move.
-2. Verify the domain for the GitHub account, then set the repository's Pages custom domain to the chosen canonical host, expected to be `friendsoffriendsband.com`.
-3. Follow current GitHub Pages DNS instructions. Do not create a wildcard DNS record. Confirm both apex and www behave as intended and enable HTTPS when the certificate is ready.
-4. In `source/config.json`, set `site_url` to `https://friendsoffriendsband.com/` and `indexing` to `true`. The stable `band_id` already uses this domain. Run the build and checks, then publish the updated `docs/`.
-5. GitHub's branch-publishing custom-domain setup writes `docs/CNAME`; preserve it. Do not add it during staging because that could redirect the preview before the domain is ready.
-6. Check the live page source for self-canonicals, `index, follow`, current domain social images, and sitemap URLs. At the domain root `/robots.txt` becomes authoritative; a project-subdirectory robots file is not authoritative for github.io.
-7. Preserve any old `/wp-content/` URLs that still receive links or traffic, or establish an appropriate redirect strategy before retiring WordPress. All artwork used by the new site is already self-hosted in `docs/assets/`; it does not depend on WordPress or Imgur.
-8. Verify Google Search Console and Bing Webmaster Tools, submit `/sitemap.xml`, inspect the three URLs, and monitor indexing and errors. Moving the same domain is a hosting move, not a Search Console change of address.
+Preview: https://bjbaker93.github.io/Friends-of-Friends/
+
+## Indexing and domain launch
+
+The original homepage has its original title and no added robots directive. The separate SEO pages carry `noindex, follow` during staging. They can be enabled when the custom domain is connected. This public preview is not private access control.
+
+The domain and DNS have not been changed. At domain cutover:
+
+1. Preserve existing DNS/mail records, verification files and important URLs. Keep the old host available during the transition.
+2. Verify domain ownership and configure the GitHub Pages custom domain before following current GitHub DNS instructions. Confirm apex/www behavior and HTTPS.
+3. The exact homepage hard-codes `https://friendsoffriendsband.com/wp-content/uploads/2025/11/new-bg.gif`. Copy the original GIF from the local `archive/` to `docs/wp-content/uploads/2025/11/new-bg.gif` before switching that domain, so the original URL continues to resolve without changing the HTML. Mobile retains its original Imgur URL.
+4. Set `site_url` to `https://friendsoffriendsband.com/` and `indexing` to `true` in `source/config.json`; rebuild and check. This updates secondary-page canonicals, social images, metadata, sitemap and crawl policy. It does not alter the homepage.
+5. Preserve `docs/CNAME` created by GitHub's custom-domain configuration. Carry forward any additional old WordPress asset paths or redirects that are needed.
+6. Verify Google Search Console and Bing Webmaster Tools; submit `/sitemap.xml` and inspect the pages. The robots file in a GitHub project subdirectory is not authoritative for github.io; it becomes authoritative at the custom-domain root.
 
 ## Search and AI discovery
 
-Implemented: descriptive page titles and meta descriptions; one H1 per page; accessible, visible HTML content; source-linked listening guide; press archive; stable MusicGroup identity with official `sameAs` profiles and press in `subjectOf`; MusicAlbum, WebSite, WebPage and breadcrumb structured data; canonical URLs; Open Graph/social cards; sitemap; crawl permissions; responsive layout; reduced-motion support; no hidden keyword blocks or autoplay audio.
+The secondary pages provide visible, sourced content with descriptive titles, descriptions, canonicals, social cards, MusicGroup/MusicAlbum/WebPage data and press references. Artist comparisons are grounded in actual interviews and reviews. Press is described in `subjectOf`; official artist profiles are in `sameAs`.
 
-No guaranteed position or AI recommendation is possible. Structured data describes the band; it does not guarantee a Google rich result. An outbound link to a publication is useful attribution, not an incoming backlink. Consistent official profiles and legitimate coverage that links back to the band's site are useful next steps. Do not buy fake accounts, planted recommendations or manipulative links. Do not create a Wikipedia page without independent notability and conflict-of-interest considerations.
+No ranking or AI recommendation is guaranteed. Linking to press provides useful attribution; incoming editorial links and consistent official profiles remain worthwhile. Avoid hidden keyword blocks, fabricated recommendations and mass query-variant pages. Google does not require special AI markup or `llms.txt` for AI search.
 
-Next useful content: firsthand song stories, recording notes, official performance videos and maintained tour pages. Add only material the band can stand behind. Keep location consistent across artist profiles: the current sources use both Gold Coast and Brisbane, so this site uses South East Queensland.
-
-OpenAI's search crawler (`OAI-SearchBot`) is allowed. Search inclusion and model-training controls are independent; `GPTBot` can be disallowed separately if desired. The current general crawl policy allows all crawlers. No special AI markup or `llms.txt` is needed for Google AI search.
-
-Guidance:
+OpenAI's search crawler is allowed. Search inclusion and model-training controls are independent; the general crawl policy currently allows all crawlers.
 
 - https://developers.google.com/search/docs/appearance/ai-features
 - https://developers.google.com/search/docs/essentials/spam-policies
 - https://schema.org/MusicGroup
 - https://developers.openai.com/api/docs/bots
 - https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site
-- https://developers.google.com/search/docs/crawling-indexing/site-move-no-url-changes
 
-## Original code and assets
-
-The exact pasted HTML and full-size original artwork are preserved locally in the ignored `archive/` folder. The original HTML includes an unlisted SoundCloud player token and is deliberately excluded from publication. The new site uses public music links. The original background GIF is approximately 14 MB; its MP4 rendition is approximately 125 KB. Mobile and reduced-motion visitors see a static image. The background includes historical promotional artwork; live-show links point to maintained listings.
+The exact original code and full-resolution artwork are also retained in the local ignored `archive/` folder. Original media URLs, player parameters and behaviors are preserved in the published homepage, as requested.

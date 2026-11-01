@@ -36,7 +36,7 @@ def press_rows(items):
 def render(filename, title, desc, body, current='home'):
     prefix = './' if filename == 'index.html' else '../'
     canonical = origin + ('' if filename == 'index.html' else filename.removesuffix('index.html'))
-    nav = [('home','Home',prefix), ('music','Music',prefix+'#music'), ('discover','Discover',prefix+'discover/'), ('press','Press',prefix+'press/'), ('live','Live',prefix+'#live')]
+    nav = [('home','ARG home',prefix), ('discover','Discover',prefix+'discover/'), ('press','Press',prefix+'press/'), ('music','Listen',profiles['spotify']), ('live','Live',profiles['bandsintown'])]
     navigation = ''.join(f'<a href="{url}"'+(' aria-current="page"' if key == current and key in ('home','discover','press') else '')+f'>{label}</a>' for key,label,url in nav)
     subject_of = []
     for item in press:
@@ -65,7 +65,7 @@ def render(filename, title, desc, body, current='home'):
 <meta property="og:title" content="{e(title,quote=True)}"><meta property="og:description" content="{e(desc,quote=True)}"><meta property="og:url" content="{canonical}">
 <meta property="og:image" content="{origin}assets/background-still.jpg"><meta property="og:image:width" content="1600"><meta property="og:image:height" content="900"><meta property="og:image:alt" content="Friends of Friends studio artwork with vintage recording equipment">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{e(title,quote=True)}"><meta name="twitter:description" content="{e(desc,quote=True)}"><meta name="twitter:image" content="{origin}assets/background-still.jpg">
-<link rel="stylesheet" href="{prefix}assets/site.css"><script type="application/ld+json">{data}</script><script src="{prefix}assets/site.js" defer></script>
+<link rel="stylesheet" href="{prefix}assets/site.css"><script type="application/ld+json">{data}</script>
 </head><body><a class="skip" href="#main">Skip to content</a>
 <header class="masthead"><div class="wrap"><a class="brand" href="{prefix}" aria-label="Friends of Friends home">FRIENDS<br>OF FRIENDS</a><nav class="nav" aria-label="Main">{navigation}</nav></div></header>
 <main id="main">{body}</main>
@@ -74,28 +74,9 @@ def render(filename, title, desc, body, current='home'):
     path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(html)
 
-home = f'''
-<section class="hero" aria-labelledby="hero-title">
-<video data-background-video data-src="./assets/background.mp4" muted loop playsinline preload="none" poster="./assets/background-still.jpg" aria-hidden="true" tabindex="-1"></video>
-<button class="motion-toggle" data-motion-toggle type="button" hidden>Pause background</button>
-<div class="wrap"><p class="eyebrow">Independent. Australian. Turn it up.</p><h1 id="hero-title">FRIENDS<br>OF FRIENDS</h1>
-<p class="intro">Alternative rock from South East Queensland.<br>Indie guitars. Pop hooks. Punk energy.</p>
-<div class="actions"><a class="cta primary" href="https://ffm.to/sfc">Listen to the EP <span aria-hidden="true">↗</span></a><a class="cta" href="#live">Live shows <span aria-hidden="true">↓</span></a><a class="cta" href="https://imprintmerch.com.au/collections/friendsoffriends">Merch <span aria-hidden="true">↗</span></a></div></div></section>
-<section class="section" id="music"><div class="wrap"><div class="section-head"><div><p class="eyebrow">01 / Music</p><h2>Made here.<br>Played everywhere.</h2></div><p>Home-recorded alternative rock with the volume pushed up. Start with <em>Synthetic Flower Chainsaw</em>, then go back to <em>Real Life, Right Now</em>.</p></div>
-<div class="grid"><article class="release featured"><div class="number">EP / 2025</div><h3>Synthetic Flower Chainsaw</h3><p>Electronic textures, sharp guitars and pop-rock hooks. Released 24 October 2025.</p><div class="release-links">{link('https://ffm.to/sfc','Choose your music service ↗')}{link(profiles['spotify'],'Spotify ↗')}</div></article>
-<article class="release"><div class="number">EP / 2024</div><h3>Real Life,<br>Right Now</h3><p>Meet the earlier chapter: new-wave and indie-rock influences, DIY production and an unfiltered emotional core.</p><div class="release-links">{link('https://open.spotify.com/album/4bSglQFwxnZCK0BrTVVBar','Listen on Spotify ↗')}</div></article></div>
-<a class="plain-link" href="{profiles['apple_music']}">Explore Friends of Friends on Apple Music ↗</a></div></section>
-<section class="section" id="about"><div class="wrap"><p class="eyebrow">02 / The band</p><h2>Big feelings.<br>Built by hand.</h2><p class="statement">Friends of Friends are an Australian alternative rock band, bringing indie-rock guitars, pop melody, electronic textures and punk energy into the same room.</p><div class="two-col"><p class="text-muted">Rooted in South East Queensland, with connections across the Gold Coast and Brisbane, the band make their music with a hands-on approach to writing, recording and production. In {link(press[0]['url'],'their AMPED interview')}, they discuss taking mixing and mastering into their own hands.</p><p class="text-muted">Want to get a feel for the sound? The 1975, The Cure and Nine Inch Nails all appear in the band's influences and press coverage. Our {link('./discover/','listening guide')} follows those connections, with a few places to start.</p></div></div></section>
-<section class="section"><div class="wrap"><div class="section-head"><div><p class="eyebrow">03 / Find your next favourite</p><h2>For the ones<br>who go looking.</h2></div><div><p>Looking for Australian alternative rock, pop-rock with an edge, or bands to discover around Brisbane? This is a place to start listening.</p><p>If you love The 1975's pop instincts or Sam Fender's guitar-driven songs, explore the influences behind Friends of Friends and hear where the music takes its own turn.</p><a class="plain-link" href="./discover/">Read the listening guide →</a></div></div></div></section>
-<section class="section" id="press"><div class="wrap"><div class="section-head"><div><p class="eyebrow">04 / Press</p><h2>In their words.</h2></div><p>Reviews, conversations and nights in the room. Read the coverage at its original source.</p></div>{press_rows([press[3],press[0],press[1]])}<a class="plain-link" href="./press/">All interviews &amp; reviews →</a></div></section>
-<section class="section" id="live"><div class="wrap shows"><div><p class="eyebrow">05 / Live</p><h2>See you<br>at the front.</h2><p>Find listed shows and follow Friends of Friends for new date announcements.</p><a class="cta" href="{profiles['bandsintown']}">Shows &amp; alerts ↗</a><p class="small" style="margin-top:24px">From Brisbane's Tivoli to Australian support bills, catch up with the live reviews in our {link('./press/','press archive')}.</p></div><div id="contact"><p class="eyebrow">06 / Get in touch</p><h2>Friends,<br>meet friends.</h2><p>For bookings, press and other enquiries.</p><p>{link('mailto:contact@friendsoffriendsband.com','contact@friendsoffriendsband.com')}</p><a class="plain-link" href="https://linktr.ee/fofband">Socials, music &amp; more ↗</a><br><a class="plain-link" href="https://imprintmerch.com.au/collections/friendsoffriends">Shop official merch ↗</a></div></div></section>
-<section class="section"><div class="wrap"><p class="eyebrow">07 / A few things to know</p><h2>Meet the band.</h2><div class="faq">
-<details><summary>Where are Friends of Friends from?</summary><p>Friends of Friends are from South East Queensland, Australia. Coverage connects the band with both the Gold Coast and Brisbane, including {link(press[0]['url'],'AMPED’s Gold Coast interview')} and {link(press[4]['url'],'Mixdown’s Brisbane feature')}.</p></details>
-<details><summary>What kind of music do Friends of Friends make?</summary><p>Australian alternative rock that brings together indie rock, pop-rock hooks, electronic production and punk energy. Start with {link('https://ffm.to/sfc','Synthetic Flower Chainsaw')} and {link('https://open.spotify.com/album/4bSglQFwxnZCK0BrTVVBar','Real Life, Right Now')}.</p></details>
-<details><summary>Where can I listen to Friends of Friends?</summary><p>Find the band on {link(profiles['spotify'],'Spotify')}, {link(profiles['apple_music'],'Apple Music')} and {link(profiles['youtube'],'YouTube')}, or {link('https://ffm.to/sfc','choose a service for Synthetic Flower Chainsaw')}.</p></details>
-<details><summary>Are there connections to The 1975 and Sam Fender?</summary><p>Yes. The 1975 helped inspire the band's beginnings, as discussed in {link(press[4]['url'],'Mixdown')}. An {link(press[5]['url'],'Alterwave interview')} describes Sam Fender and Bruce Springsteen as influences on a then-upcoming single. Read more in {link('./discover/','our listening guide')}.</p></details>
-</div></div></section>'''
-render('index.html','Friends of Friends | Australian Alternative Rock Band',description,home)
+# Keep the ARG homepage byte-for-byte identical to the user's supplied HTML.
+# SEO content and metadata belong to the separate discovery and press pages.
+(OUT / 'index.html').write_bytes((ROOT / 'source/homepage.html').read_bytes())
 
 discover = f'''
 <section class="page-intro"><div class="wrap"><p class="eyebrow">A Friends of Friends listening guide</p><h1>For fans of<br>The 1975.<br>And a little further.</h1><p class="lede">Looking for Australian bands like The 1975, or exploring the guitar-driven world around Sam Fender? Meet Friends of Friends through the influences and stories behind the music.</p><div class="actions"><a class="cta primary" href="https://ffm.to/sfc">Start listening ↗</a></div></div></section>
@@ -119,4 +100,4 @@ not_found = f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><m
 urls = [origin,origin+'discover/',origin+'press/']
 (OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'  <url><loc>{e(url)}</loc></url>\n' for url in urls)+'</urlset>\n')
 (OUT/'robots.txt').write_text('User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\n'+(f'Sitemap: {origin}sitemap.xml\n' if indexing else '# Preview pages carry noindex. Enable indexing at the custom-domain launch.\n'))
-print(f'Built 3 pages + 404. Origin: {origin}; indexing: {indexing}.')
+print(f'Copied exact ARG homepage; built 2 SEO pages + 404. Origin: {origin}; secondary-page indexing: {indexing}.')

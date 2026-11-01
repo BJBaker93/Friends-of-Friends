@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Check deployable output: links, metadata, JSON-LD, sitemap and staging policy."""
 import json
+from hashlib import sha256
 import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
@@ -44,8 +45,14 @@ class Page(HTMLParser):
             self.jsonld.append(json.loads(self.buffer))
             self.in_json = False
 
+homepage = (OUT/'index.html').read_bytes()
+assert homepage == (ROOT/'source/homepage.html').read_bytes(), 'ARG homepage differs from its source'
+assert sha256(homepage).hexdigest() == '7dc7f6afb0126e6d712137bf9fb7b4c10af2fa7ef8f920d26cbd51fac3d8cd58', 'ARG homepage differs from the original pasted HTML'
+
 pages={}
 for path in OUT.rglob('*.html'):
+    if path == OUT/'index.html':
+        continue
     parsed = Page()
     text = path.read_text()
     parsed.feed(text)
@@ -54,7 +61,7 @@ for path in OUT.rglob('*.html'):
     assert parsed.title.strip(), f'{path}: missing title'
     pages[path.resolve()] = parsed
 
-canonicals=[]
+canonicals=[origin]
 for path,p in pages.items():
     if path.name != '404.html':
         expected = origin + ('' if path == OUT/'index.html' else str(path.relative_to(OUT)).removesuffix('index.html'))
@@ -89,4 +96,4 @@ assert (OUT/'.nojekyll').exists(), 'Missing GitHub Pages marker'
 assert not (OUT/'CNAME').exists() or config['indexing'], 'Custom domain set during staging'
 for file in (OUT/'assets').iterdir():
     assert file.stat().st_size < 1_000_000, f'Oversized published asset: {file.name}'
-print(f'PASS: {len(pages)} HTML pages; internal links and anchors; metadata; JSON-LD; sitemap; staging policy; asset sizes.')
+print(f'PASS: exact original ARG homepage; {len(pages)} supporting HTML pages; secondary links, metadata, JSON-LD, sitemap and staging policy.')

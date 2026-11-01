@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fullscreen GIF Background with  Fixed Position Buttons</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        
+        body {
+            /* Desktop background */
+            background: url('https://friendsoffriendsband.com/wp-content/uploads/2025/11/new-bg.gif') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 1; /* Ensure background is behind everything */
+        }
+
+        /* Mobile placeholder background */
+        @media (max-width: 768px) {
+            body {
+                background: url('https://i.imgur.com/QQYS4jT.png') no-repeat center center fixed;
+                background-size: cover;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                z-index: 1; /* Ensure background is behind everything */
+            }
+        }
+
+        .button {
+            position: absolute;
+            width: 30px; /* Adjust size of circles */
+            height: 30px; /* Adjust size of circles */
+            background-color: rgba(0, 0, 0, 0.3); /* 50% transparent black */
+            border: 3px solid #ccc; /* Thin grey border */
+            border-radius: 50%; /* Ensure circle shape */
+            cursor: pointer;
+            z-index: 2; /* Ensure buttons are above the background */
+            transition: transform 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box; /* Include border in size calculation */
+        }
+
+        .button:hover {
+            transform: scale(1.4); /* Enlarge by 40% from center point on hover */
+        }
+
+        .button span {
+            position: absolute;
+            top: 50%; /* Center vertically */
+            left: calc(100% + 30px); /* Position to the right of the button */
+            transform: translate(-50%, -50%); /* Center horizontally and vertically */
+            color: #fff; /* Text color */
+            font-family: 'Courier New bold', Courier, monospace; /* Typewriter font */
+            font-size: 14px; /* Smaller font size */
+            white-space: nowrap; /* Prevent text from wrapping */
+            opacity: 0; /* Initially invisible */
+            transition: opacity 0.3s ease;
+            z-index: 3; /* Ensure it's above the buttons */
+            width: 120%; /* Adjust width */
+            text-align: center; /* Center text */
+        }
+
+        .button:hover span {
+            opacity: 1; /* Fade in on hover */
+        }
+
+        /* Named selectors for each button - Desktop version */
+        .button.socials {
+            top: 90px;
+            left: 370px;
+        }
+
+        .button.listen {
+            top: 100px;
+            right: 300px;
+        }
+
+        .button.contact {
+            top: 30px;
+            left: 470px;
+        }
+
+        .button.merch {
+            top: -100px; /* Adjusted to move much further up */
+            right: 300px;
+        }
+
+        .button.tour {
+            top: 200px; /* Adjust this value to move the button to a more suitable position */
+            left: 10px;
+        }
+
+        /* Media query for mobile screens */
+        @media (max-width: 768px) {
+            body {
+                /* Placeholder background while GIF loads */
+                background: url('https://i.imgur.com/QQYS4jT.png') no-repeat center center fixed;
+                background-size: cover;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                z-index: 1; /* Ensure background is behind everything */
+            }
+
+            .button {
+                width: 30px; /* Larger size for mobile */
+                height: 30px; /* Larger size for mobile */
+            }
+
+            .button span {
+                left: calc(100% + 30px); /* Adjust position for mobile */
+                opacity: 1; /* Ensure span is visible on mobile */
+            }
+
+            .button.socials {
+                top: 80px; /* Adjusted position for mobile */
+                left: 60px; /* Adjusted position for mobile */
+            }
+
+            .button.listen {
+                top: 40px; /* Adjusted position for mobile */
+                right: 75px; /* Adjusted position for mobile */
+            }
+
+            .button.contact {
+                top: 50px; /* Adjusted position for mobile */
+                left: 80px; /* Adjusted position for mobile */
+            }
+
+            .button.merch {
+                top: -60px; /* Adjusted position for mobile */
+                right: 90px; /* Adjusted position for mobile */
+            }
+
+            .button.tour {
+                top: 1px; /* Adjusted position for mobile */
+                left: 10px; /* Adjusted position for mobile */
+            }
+        }
+
+        /* Styling for hidden SoundCloud iframe */
+        .soundcloud {
+            position: absolute;
+            top: -1000px; /* Move iframe out of visible area */
+            left: -1000px; /* Move iframe out of visible area */
+            z-index: -1; /* Ensure it's behind everything */
+            visibility: hidden; /* Hide iframe */
+        }
+    </style>
+</head>
+<body>
+    <!-- SoundCloud iframe -->
+    <iframe class="soundcloud" width="1%" height="1" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1851453012%3Fsecret_token%3Ds-WMVF84YIGl6&color=%23000000&inverse=true&auto_play=true&show_user=true"></iframe>
+
+    <!-- SoundCloud iframe description -->
+    <div style="font-size: 1px; color: #cccccc; line-break: anywhere; word-break: normal; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-family: Interstate, Lucida Grande, Lucida Sans Unicode, Lucida Sans, Garuda, Verdana, Tahoma, sans-serif; font-weight: 1;">
+        <a href="https://soundcloud.com/friendsoffriendsband" title="Friends of Friends" target="_blank" style="color: #cccccc; text-decoration: none;">Friends of Friends</a> · <a href="https://soundcloud.com/friendsoffriendsband/real-life-right-now/s-WMVF84YIGl6" title="REAL LIFE, RIGHT NOW" target="_blank" style="color: #cccccc; text-decoration: none;">REAL LIFE, RIGHT NOW</a>
+    </div>
+    
+    <!-- Buttons -->
+    <a href="https://linktr.ee/fofband" class="button socials"><span>Socials</span></a>
+    <a href="https://open.spotify.com/album/4bSglQFwxnZCK0BrTVVBar?si=a2yTUyeAQFOO1Ha7qwNtmQ" class="button listen"><span>Listen</span></a>
+    <a href="mailto:contact@friendsoffriendsband.com" class="button contact"><span>Contact</span></a>
+    <a href="https://imprintmerch.com.au/collections/friendsoffriends" class="button merch"><span>Merch</span></a>
+    <a href="https://www.destroyalllines.com/tours/fof-jacob-fitzgerald" class='button tour'><span>Tour</span></a>
+</body>
+</html>
