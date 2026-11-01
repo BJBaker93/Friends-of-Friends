@@ -1,17 +1,17 @@
 # Friends of Friends ARG website
 
-The homepage is the user's original pasted HTML, preserved byte-for-byte. It is an ARG experience: the original full-screen GIF, positions of clickable circles, hover labels, mobile rules, links and SoundCloud player remain exactly as supplied. Do not redesign it or inject text, navigation, metadata or scripts into it.
+The homepage preserves the original ARG experience and artwork. At the user's request, hotspots are now anchored to objects in image coordinates: Listen on the CD player; Socials and Contact on the computer; Tour on the bottom posters; Merch on the shirt draped over the amp. The original links, circle appearance, hover behavior and hidden SoundCloud player are preserved. Do not redesign the homepage or add SEO content to it.
 
 SEO content lives on separate, readable pages:
 
 - `/discover/`: a sourced listening guide with The 1975, Sam Fender, Australian alternative rock and Brisbane connections.
 - `/press/`: eight verified interviews, reviews and features.
 
-These pages have their own navigation and SEO metadata. No links or other elements have been added to the ARG homepage. The sitemap lists the homepage and both supporting pages.
+These pages have their own navigation and SEO metadata. No SEO links or content have been added to the ARG homepage. The sitemap lists the homepage and both supporting pages.
 
 ## Source and build
 
-- `source/homepage.html` is the exact original homepage source.
+- `source/homepage.html` is the approved ARG homepage source, including the requested hotspot alignment.
 - `scripts/build.py` copies it directly to `docs/index.html` and generates the secondary pages.
 - `source/press.json` contains research and source URLs.
 - `source/config.json` controls the origin and indexing policy of secondary pages.
@@ -24,7 +24,7 @@ python3 scripts/build.py
 python3 scripts/check_site.py
 ```
 
-The checker verifies the homepage against the original pasted file's SHA-256, then checks secondary-page links, metadata, JSON-LD and the sitemap. It intentionally does not impose SEO or markup changes on the original homepage.
+The checker verifies the homepage against the approved layout's SHA-256, then checks secondary-page links, metadata, JSON-LD and the sitemap. It intentionally does not impose SEO or markup changes on the original homepage.
 
 Repository: https://github.com/BJBaker93/Friends-of-Friends
 
@@ -38,7 +38,7 @@ The domain and DNS have not been changed. At domain cutover:
 
 1. Preserve existing DNS/mail records, verification files and important URLs. Keep the old host available during the transition.
 2. Verify domain ownership and configure the GitHub Pages custom domain before following current GitHub DNS instructions. Confirm apex/www behavior and HTTPS.
-3. The exact homepage hard-codes `https://friendsoffriendsband.com/wp-content/uploads/2025/11/new-bg.gif`. Copy the original GIF from the local `archive/` to `docs/wp-content/uploads/2025/11/new-bg.gif` before switching that domain, so the original URL continues to resolve without changing the HTML. Mobile retains its original Imgur URL.
+3. The homepage hard-codes `https://friendsoffriendsband.com/wp-content/uploads/2025/11/new-bg.gif`. Copy the original GIF from the local `archive/` to `docs/wp-content/uploads/2025/11/new-bg.gif` before switching that domain, so the original URL continues to resolve without changing the HTML. Mobile uses an exact local copy of the original Imgur PNG in `docs/assets/mobile-original.png` to avoid unreliable hotlink loading. A centered transparent hotspot layer tracks the background cover crop. The original portrait artwork and its separate coordinate map are used at aspect ratios of 4:3 or narrower, including portrait tablets.
 4. Set `site_url` to `https://friendsoffriendsband.com/` and `indexing` to `true` in `source/config.json`; rebuild and check. This updates secondary-page canonicals, social images, metadata, sitemap and crawl policy. It does not alter the homepage.
 5. Preserve `docs/CNAME` created by GitHub's custom-domain configuration. Carry forward any additional old WordPress asset paths or redirects that are needed.
 6. Verify Google Search Console and Bing Webmaster Tools; submit `/sitemap.xml` and inspect the pages. The robots file in a GitHub project subdirectory is not authoritative for github.io; it becomes authoritative at the custom-domain root.

@@ -13,9 +13,10 @@
         }
         
         body {
-            /* Desktop background */
+            /* Original desktop artwork */
             background: url('https://friendsoffriendsband.com/wp-content/uploads/2025/11/new-bg.gif') no-repeat center center fixed;
             background-size: cover;
+            background-color: #000;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,17 +24,17 @@
             z-index: 1; /* Ensure background is behind everything */
         }
 
-        /* Mobile placeholder background */
-        @media (max-width: 768px) {
-            body {
-                background: url('https://i.imgur.com/QQYS4jT.png') no-repeat center center fixed;
-                background-size: cover;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                position: relative;
-                z-index: 1; /* Ensure background is behind everything */
-            }
+        /* This invisible layer has exactly the same size and crop as the
+           background, so every hotspot stays attached to its object. */
+        .hotspots {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: max(100vw, 177.7777777778vh);
+            height: max(100vh, 56.25vw);
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 2;
         }
 
         .button {
@@ -45,6 +46,8 @@
             border-radius: 50%; /* Ensure circle shape */
             cursor: pointer;
             z-index: 2; /* Ensure buttons are above the background */
+            transform: translate(-50%, -50%);
+            pointer-events: auto;
             transition: transform 0.3s ease;
             display: flex;
             justify-content: center;
@@ -53,7 +56,7 @@
         }
 
         .button:hover {
-            transform: scale(1.4); /* Enlarge by 40% from center point on hover */
+            transform: translate(-50%, -50%) scale(1.4); /* Enlarge around the object */
         }
 
         .button span {
@@ -76,78 +79,53 @@
             opacity: 1; /* Fade in on hover */
         }
 
-        /* Named selectors for each button - Desktop version */
-        .button.socials {
-            top: 90px;
-            left: 370px;
-        }
+        /* Positions are percentages of the original 2560 x 1440 artwork. */
+        .button.listen { left: 21.9%; top: 66.6%; }
+        .button.socials { left: 80.5%; top: 61.3%; }
+        .button.contact { left: 79%; top: 77.3%; }
+        .button.merch { left: 27.5%; top: 47.5%; }
+        .button.tour { left: 46.5%; top: 84%; }
 
-        .button.listen {
-            top: 100px;
-            right: 300px;
-        }
-
-        .button.contact {
-            top: 30px;
-            left: 470px;
-        }
-
-        .button.merch {
-            top: -100px; /* Adjusted to move much further up */
-            right: 300px;
-        }
-
-        .button.tour {
-            top: 200px; /* Adjust this value to move the button to a more suitable position */
-            left: 10px;
-        }
-
-        /* Media query for mobile screens */
-        @media (max-width: 768px) {
+        /* Use the original portrait composition on narrow/portrait screens.
+           Its objects occupy different positions from the desktop artwork. */
+        @media (max-aspect-ratio: 4/3) {
             body {
-                /* Placeholder background while GIF loads */
-                background: url('https://i.imgur.com/QQYS4jT.png') no-repeat center center fixed;
-                background-size: cover;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                position: relative;
-                z-index: 1; /* Ensure background is behind everything */
+                background-image: url('./assets/mobile-original.png');
             }
 
-            .button {
-                width: 30px; /* Larger size for mobile */
-                height: 30px; /* Larger size for mobile */
+            .hotspots {
+                width: max(100vw, 56.25vh);
+                height: max(100vh, 177.7777777778vw);
             }
+
+            .button.listen { left: 16%; top: 54%; }
+            .button.socials { left: 86%; top: 54.5%; }
+            .button.contact { left: 84%; top: 61%; }
+            .button.merch { left: 20%; top: 45.3%; }
+            .button.tour { left: 45.5%; top: 64%; }
 
             .button span {
-                left: calc(100% + 30px); /* Adjust position for mobile */
-                opacity: 1; /* Ensure span is visible on mobile */
+                left: calc(100% + 12px);
+                width: auto;
+                transform: translateY(-50%);
+                opacity: 1;
             }
 
-            .button.socials {
-                top: 80px; /* Adjusted position for mobile */
-                left: 60px; /* Adjusted position for mobile */
+            /* Keep computer labels inside the screen on mobile. */
+            .button.socials span,
+            .button.contact span {
+                left: auto;
+                right: calc(100% + 12px);
+                text-align: right;
             }
+        }
 
-            .button.listen {
-                top: 40px; /* Adjusted position for mobile */
-                right: 75px; /* Adjusted position for mobile */
-            }
-
-            .button.contact {
-                top: 50px; /* Adjusted position for mobile */
-                left: 80px; /* Adjusted position for mobile */
-            }
-
-            .button.merch {
-                top: -60px; /* Adjusted position for mobile */
-                right: 90px; /* Adjusted position for mobile */
-            }
-
-            .button.tour {
-                top: 1px; /* Adjusted position for mobile */
-                left: 10px; /* Adjusted position for mobile */
+        /* On exceptionally tall screens, retain the full portrait scene. */
+        @media (max-aspect-ratio: 2/5) {
+            body { background-size: 100% auto; }
+            .hotspots {
+                width: 100vw;
+                height: 177.7777777778vw;
             }
         }
 
@@ -170,11 +148,13 @@
         <a href="https://soundcloud.com/friendsoffriendsband" title="Friends of Friends" target="_blank" style="color: #cccccc; text-decoration: none;">Friends of Friends</a> · <a href="https://soundcloud.com/friendsoffriendsband/real-life-right-now/s-WMVF84YIGl6" title="REAL LIFE, RIGHT NOW" target="_blank" style="color: #cccccc; text-decoration: none;">REAL LIFE, RIGHT NOW</a>
     </div>
     
-    <!-- Buttons -->
+    <!-- Object-aligned hotspots; links and player remain unchanged. -->
+    <nav class="hotspots" aria-label="Explore the room">
     <a href="https://linktr.ee/fofband" class="button socials"><span>Socials</span></a>
     <a href="https://open.spotify.com/album/4bSglQFwxnZCK0BrTVVBar?si=a2yTUyeAQFOO1Ha7qwNtmQ" class="button listen"><span>Listen</span></a>
     <a href="mailto:contact@friendsoffriendsband.com" class="button contact"><span>Contact</span></a>
     <a href="https://imprintmerch.com.au/collections/friendsoffriends" class="button merch"><span>Merch</span></a>
     <a href="https://www.destroyalllines.com/tours/fof-jacob-fitzgerald" class='button tour'><span>Tour</span></a>
+    </nav>
 </body>
 </html>

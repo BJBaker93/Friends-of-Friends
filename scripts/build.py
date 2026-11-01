@@ -74,7 +74,7 @@ def render(filename, title, desc, body, current='home'):
     path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(html)
 
-# Keep the ARG homepage byte-for-byte identical to the user's supplied HTML.
+# Copy the approved ARG homepage verbatim, including its object-aligned hotspots.
 # SEO content and metadata belong to the separate discovery and press pages.
 (OUT / 'index.html').write_bytes((ROOT / 'source/homepage.html').read_bytes())
 
@@ -100,4 +100,4 @@ not_found = f'''<!doctype html><html lang="en-AU"><head><meta charset="utf-8"><m
 urls = [origin,origin+'discover/',origin+'press/']
 (OUT/'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'+''.join(f'  <url><loc>{e(url)}</loc></url>\n' for url in urls)+'</urlset>\n')
 (OUT/'robots.txt').write_text('User-agent: *\nAllow: /\n\nUser-agent: OAI-SearchBot\nAllow: /\n\n'+(f'Sitemap: {origin}sitemap.xml\n' if indexing else '# Preview pages carry noindex. Enable indexing at the custom-domain launch.\n'))
-print(f'Copied exact ARG homepage; built 2 SEO pages + 404. Origin: {origin}; secondary-page indexing: {indexing}.')
+print(f'Copied approved ARG homepage; built 2 SEO pages + 404. Origin: {origin}; secondary-page indexing: {indexing}.')
