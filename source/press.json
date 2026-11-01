@@ -1,0 +1,103 @@
+{
+  "researched_at": "2026-11-02",
+  "sources": [
+    {
+      "publisher": "AMPED Magazine UK",
+      "title": "Meet Friends Of Friends. The Australian DIY Champions Taking Their Sound Global",
+      "date": "2025-10-24",
+      "author": "Felix Bartlett",
+      "url": "https://ampedmagazine.co.uk/2025/10/24/meet-friends-of-friends-the-australian-diy-champions-taking-their-sound-global/",
+      "summary": "A conversation about the band's independent production, Gold Coast roots, Synthetic Flower Chainsaw and the influences behind their sound.",
+      "supports": ["Gold Coast setting", "DIY recording, mixing and mastering", "The 1975, Blink-182, U2 and Nine Inch Nails influences", "Kasabian support at Fortitude Music Hall"],
+      "caution": "Article conflicts with other sources on formation timing and EP track order; do not reproduce those details."
+    },
+    {
+      "publisher": "HIVE Magazine",
+      "title": "FRIENDS OF FRIENDS — ‘SYNTHETIC FLOWER CHAINSAW’",
+      "date": null,
+      "date_label": "22 October (year not displayed in accessible article)",
+      "author": "Ellie Blanchard",
+      "url": "https://www.hivemagazine.net/music-reviews/friends-of-friends-synthetic-flower-chainsaw",
+      "summary": "A four-star review exploring the EP's electronics, alt-rock hooks and homemade production, with comparisons to The 1975, Wet Leg and Courting.",
+      "supports": ["Four-star rating", "Gold Coast", "alt-rock and pop-rock", "Independent The 1975 comparison", "Five EP tracks"],
+      "caution": "Omit exact publication year unless verified from metadata."
+    },
+    {
+      "publisher": "scenestr",
+      "title": "Review: All Time Low @ Hindley Street Music Hall (Adelaide)",
+      "date": "2025-12-12",
+      "author": "Thomas Jackson",
+      "url": "https://scenestr.com.au/music/review-all-time-low-hindley-street-music-hall-adelaide-20251212",
+      "summary": "Live coverage of Friends of Friends supporting All Time Low in Adelaide, highlighting I Like Ya, Skin and the band's energetic Britpop influence.",
+      "supports": ["All Time Low support on 11 December 2025", "Independent The 1975 comparison", "alt-pop", "Barnaby Baker vocals/guitar"],
+      "caution": "The review is primarily about All Time Low; do not label it a standalone Friends of Friends headline review."
+    },
+    {
+      "publisher": "Everblack Media",
+      "title": "Enter Shikari, Grandson, Friends of Friends @ The Tivoli Brisbane [Live Review]",
+      "date": "2026-05-25",
+      "author": "Jack Price",
+      "url": "https://www.everblack.com.au/2026/05/25/enter-shikari-grandson-friends-of-friends-the-tivoli-brisbane-live-review/",
+      "summary": "Coverage from The Tivoli in Brisbane, where Friends of Friends opened the bill with Enter Shikari and Grandson.",
+      "supports": ["Brisbane performance", "Enter Shikari and Grandson support", "indie-pop-punk sound"],
+      "caution": "Publication date is verified; exact concert date not separately established."
+    },
+    {
+      "publisher": "Mixdown Magazine",
+      "title": "Up Close & Personal: Friends of Friends",
+      "date": "2023-02-02",
+      "author": "Mixdown staff",
+      "url": "https://mixdownmag.com.au/features/up-close-personal-friends-of-friends/",
+      "summary": "Barnaby Baker discusses the band's beginnings, The 1975's influence, home-studio production and the making of Morphine.",
+      "supports": ["Brisbane indie rock", "Barnaby Baker", "The 1975 inspired forming a band", "Nine Inch Nails, Brian Eno and Jack Antonoff influences"],
+      "caution": "Historical lineup; do not present as current."
+    },
+    {
+      "publisher": "Alterwave",
+      "title": "Friends Of Friends Chats About The Magic Of Making Music With Your Friends + More",
+      "date": "2023-03-20",
+      "author": null,
+      "url": "https://www.alterwave.com.au/publication-all/2023/03/20/interview-friends-of-friends-chats-about-the-magic-of-making-music-with-your-friends-more",
+      "summary": "An interview on touring with Slowly Slowly, experimental production and a then-upcoming single drawing on Springsteen and Sam Fender.",
+      "supports": ["Queensland alternative/indie rock/future-pop", "Sam Fender and Springsteen influence on one upcoming single", "Slowly Slowly tour"],
+      "caution": "Sam Fender comparison applies to one then-upcoming single, rather than the entire catalogue."
+    },
+    {
+      "publisher": "The AU Review",
+      "title": "Friends of Friends interview each other ahead of their national tour",
+      "date": "2023-02-02",
+      "author": "Dylan Oxley",
+      "url": "https://www.theaureview.com/music/friends-of-friends-interview-each-other-ahead-of-their-national-tour/",
+      "summary": "The band interview one another about their instruments, influences and touring, including Frank Christian's affinity for The 1975 and Sam Fender.",
+      "supports": ["Brisbane indie-rock", "Historical lineup", "The 1975, Sam Fender and LANY named as dream tour partners", "Nine Inch Nails production influence"],
+      "caution": "Dream tour partners are not endorsements or actual collaborations."
+    },
+    {
+      "publisher": "With Drums and Colour",
+      "title": "FRIENDS OF FRIENDS RELEASE SINGLE ‘I LIKE YA’",
+      "date": "2025-08-06",
+      "author": "WDAC",
+      "url": "https://withdrumsandcolour.com/2025/08/06/friends-of-friends-release-single-i-like-ya/",
+      "summary": "The story behind I Like Ya, from Frank Christian's Cure-inspired guitar idea to the band's bedroom recording and production process.",
+      "supports": ["The Cure influence on I Like Ya", "Barnaby Baker vocals", "DIY recording/mixing/mastering"],
+      "caution": "Release article likely uses supplied press copy; editorial independence differs from a review/interview."
+    }
+  ],
+  "official_profiles": {
+    "triple_j_unearthed": "https://www.abc.net.au/triplejunearthed/artist/friendsoffriends",
+    "spotify": "https://open.spotify.com/artist/40ok5HAzsmqFmyJnjE37cI",
+    "apple_music": "https://music.apple.com/us/artist/friends-of-friends/1309152778",
+    "instagram": "https://www.instagram.com/friendsoffriendsband/",
+    "youtube": "https://www.youtube.com/channel/UCgtvGOOJdwUREs0HDKs2FXQ",
+    "bandsintown": "https://www.bandsintown.com/a/15466180-friends-of-friends"
+  },
+  "recommended_bio": "Friends of Friends are an Australian alternative rock band from South East Queensland, combining indie-rock guitars, pop hooks, electronic textures and punk energy. Their releases include Real Life, Right Now and Synthetic Flower Chainsaw.",
+  "location_notes": "Official Apple Music lists Brisbane, QLD, Australia; official triple j Unearthed lists Gold Coast, QLD. Independent 2023 Mixdown and AU Review interviews describe Brisbane, while 2025 AMPED/HIVE describe Gold Coast. South East Queensland is the safest umbrella; ask band to standardise profile location before pursuing local queries.",
+  "genre_notes": "Official triple j genres Indie/Rock/Pop and Attention track Indie/Punk. Apple Music Alternative. HIVE alt-rock/pop-rock. Phrase as alternative rock with indie, pop and punk influences; no need to claim a purist punk identity.",
+  "comparison_notes": {
+    "the_1975": "Strong: band origin interview in Mixdown, independent HIVE EP review, independent scenestr live review, plus AMPED interview.",
+    "sam_fender": "Specific: Alterwave 2023 interview describes one upcoming single as homage to Springsteen/Sam Fender. AU Review lists him as dream touring partner. Suitable for an honestly framed influences/listening guide with citations, not a fabricated critic endorsement.",
+    "other_artists": "Cure (Frank's I Like Ya songwriting story), Nine Inch Nails (Barnaby's repeated production influence), Blink-182/U2 (AMPED), Wet Leg/Courting (HIVE comparisons)."
+  },
+  "avoid_claims": ["Do not state guaranteed search/AI rank or 'number one Brisbane band'.", "Do not treat band-written profile accolades as independently verified BBC/Kerrang coverage.", "Do not fabricate current members, formation year or forthcoming tour dates from inconsistent historical sources.", "Do not confuse the band with 5 Seconds of Summer's Friends of Friends philanthropic brand."]
+}
