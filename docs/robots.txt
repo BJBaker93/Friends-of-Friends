@@ -4,4 +4,4 @@ Allow: /
 User-agent: OAI-SearchBot
 Allow: /
 
-# Preview pages carry noindex. Enable indexing at the custom-domain launch.
+Sitemap: https://friendsoffriendsband.com/sitemap.xml

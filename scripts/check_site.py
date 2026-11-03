@@ -49,6 +49,12 @@ homepage = (OUT/'index.html').read_bytes()
 assert homepage == (ROOT/'source/homepage.html').read_bytes(), 'ARG homepage differs from its source'
 assert sha256(homepage).hexdigest() == '56b9f5f05871745c489e4986571525d0257eac7d18deb90899beb73d0c9d8033', 'ARG homepage differs from the approved hotspot layout'
 
+# The unchanged homepage requests this original URL after the domain moves.
+# Keep the exact artwork in the deployed tree so retiring WordPress is safe.
+background = OUT/'wp-content/uploads/2025/11/new-bg.gif'
+assert background.is_file(), 'Missing original desktop GIF at its preserved URL'
+assert sha256(background.read_bytes()).hexdigest() == 'd6d50dfd5093d5517f3f293dfa7fe3ad51f95555928e6b610e7fc0d424d70707', 'Original desktop GIF has changed'
+
 pages={}
 for path in OUT.rglob('*.html'):
     if path == OUT/'index.html':
@@ -94,6 +100,8 @@ locations=[node.text for node in sitemap.findall('.//{http://www.sitemaps.org/sc
 assert sorted(locations) == sorted(canonicals), 'Sitemap and canonical URLs disagree'
 assert (OUT/'.nojekyll').exists(), 'Missing GitHub Pages marker'
 assert not (OUT/'CNAME').exists() or config['indexing'], 'Custom domain set during staging'
+if (OUT/'CNAME').exists():
+    assert (OUT/'CNAME').read_text().strip() == urlsplit(origin).hostname, 'Custom domain and canonical origin disagree'
 for file in (OUT/'assets').iterdir():
     assert file.stat().st_size < (4_000_000 if file.name == 'mobile-original.png' else 1_000_000), f'Oversized published asset: {file.name}'
-print(f'PASS: approved ARG homepage; {len(pages)} supporting HTML pages; secondary links, metadata, JSON-LD, sitemap and staging policy.')
+print(f'PASS: approved ARG homepage and original desktop GIF; {len(pages)} supporting HTML pages; secondary links, metadata, JSON-LD, sitemap and domain policy.')

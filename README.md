@@ -32,13 +32,15 @@ Preview: https://bjbaker93.github.io/Friends-of-Friends/
 
 ## Indexing and domain launch
 
-The original homepage has its original title and no added robots directive. The separate SEO pages carry `noindex, follow` during staging. They can be enabled when the custom domain is connected. This public preview is not private access control.
+The original homepage has its original title and no added robots directive. `source/config.json` controls indexing and canonical URLs for the separate SEO pages. Preview builds use the GitHub preview URL with `indexing: false`; the prepared domain-launch build uses `https://friendsoffriendsband.com/` with `indexing: true`. This public preview is not private access control.
 
-The domain and DNS have not been changed. At domain cutover:
+The domain-launch files include `docs/CNAME` for the apex domain and the exact original desktop GIF at `docs/wp-content/uploads/2025/11/new-bg.gif`. The checker verifies the GIF's SHA-256 as well as the approved homepage. GitHub Pages settings and DNS are configured separately from the build.
+
+At domain cutover:
 
 1. Preserve existing DNS/mail records, verification files and important URLs. Keep the old host available during the transition.
 2. Verify domain ownership and configure the GitHub Pages custom domain before following current GitHub DNS instructions. Confirm apex/www behavior and HTTPS.
-3. The homepage hard-codes `https://friendsoffriendsband.com/wp-content/uploads/2025/11/new-bg.gif`. Copy the original GIF from the local `archive/` to `docs/wp-content/uploads/2025/11/new-bg.gif` before switching that domain, so the original URL continues to resolve without changing the HTML. Mobile uses an exact local copy of the original Imgur PNG in `docs/assets/mobile-original.png` to avoid unreliable hotlink loading. A centered transparent hotspot layer tracks the background cover crop. The original portrait artwork and its separate coordinate map are used at aspect ratios of 4:3 or narrower, including portrait tablets.
+3. The homepage hard-codes `https://friendsoffriendsband.com/wp-content/uploads/2025/11/new-bg.gif`. Preserve the included original GIF at `docs/wp-content/uploads/2025/11/new-bg.gif` when publishing, so the original URL continues to resolve without changing the HTML. Mobile uses an exact local copy of the original Imgur PNG in `docs/assets/mobile-original.png` to avoid unreliable hotlink loading. A centered transparent hotspot layer tracks the background cover crop. The original portrait artwork and its separate coordinate map are used at aspect ratios of 4:3 or narrower, including portrait tablets.
 4. Set `site_url` to `https://friendsoffriendsband.com/` and `indexing` to `true` in `source/config.json`; rebuild and check. This updates secondary-page canonicals, social images, metadata, sitemap and crawl policy. It does not alter the homepage.
 5. Preserve `docs/CNAME` created by GitHub's custom-domain configuration. Carry forward any additional old WordPress asset paths or redirects that are needed.
 6. Verify Google Search Console and Bing Webmaster Tools; submit `/sitemap.xml` and inspect the pages. The robots file in a GitHub project subdirectory is not authoritative for github.io; it becomes authoritative at the custom-domain root.
